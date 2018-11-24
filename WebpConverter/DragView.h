@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^GragViewImageUrlsProcessBlock) (NSArray <DragFileModel *>*);
 typedef void(^GragViewImageProcessBlock) (NSImage *);
 
-@interface DragView : NSView
+@interface DragView : NSVisualEffectView
 
 - (void)registerImageUrlsProcess:(GragViewImageUrlsProcessBlock)block;
 - (void)registerImageProcess:(GragViewImageProcessBlock)block;

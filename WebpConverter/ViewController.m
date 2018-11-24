@@ -27,6 +27,7 @@
 
 @property (nonatomic,strong) NSOperationQueue *queue;
 @property (nonatomic,strong) NSOpenPanel *openPanel;
+@property (weak) IBOutlet NSButton *beginConvertBtn;
 
 @end
 
@@ -73,8 +74,8 @@
     NSMutableArray *result = [NSMutableArray arrayWithCapacity:3];
     for (DragFileModel *model in modelArr) {
         CellModel *cModel = [CellModel new];
-        cModel.filePath = model.orignPath;
-        NSDictionary *attributes = [[NSFileManager defaultManager]attributesOfItemAtPath:cModel.filePath error:nil];
+        cModel.srcPath = model.orignPath;
+        NSDictionary *attributes = [[NSFileManager defaultManager]attributesOfItemAtPath:cModel.srcPath error:nil];
         cModel.fileSize = [attributes[NSFileSize]intValue];
         [result addObject:cModel];
     }
@@ -87,6 +88,7 @@
     [self.tableView reloadData];
     self.tripLabel.hidden = [_dataSource count] > 0;
     [self hideTableView:!self.tripLabel.hidden];
+    self.beginConvertBtn.enabled = self.tripLabel.hidden;
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -149,11 +151,68 @@
     NSLog(@"panelSelectionDidChange:%@",sender.URLs);
 }
 
-- (IBAction)beginConvert:(id)sender {
+- (void)checkAllTaskFinish
+{
+    BOOL finished = [self.queue operationCount] == 0;
+    if (finished) {
+        @synchronized (self) {
+            
+            NSArray *urlArr = [self.dataSource copy];
+            for (CellModel *model in urlArr) {
+                if (model.state == CellTaskStateNone || model.state == CellTaskStateRuning) {
+                    finished = NO;
+                    break;
+                }
+            }
+        }
+    }
+    
+    if (finished) {
+        if (self.beginConvertBtn.enabled && self.beginConvertBtn.state == NSControlStateValueOn) {
+            BOOL hasFailed = NO;
+            NSArray *urlArr = [self.dataSource copy];
+            for (CellModel *model in urlArr) {
+                if (model.state == CellTaskStateFailed) {
+                    hasFailed = YES;
+                    break;
+                }
+            }
+            self.beginConvertBtn.state = NSControlStateValueOff;
+            
+            if (hasFailed) {
+                self.beginConvertBtn.enabled = YES;
+            } else {
+                self.beginConvertBtn.enabled = NO;
+            }
+        }
+    }
+}
+
+- (IBAction)toggleConvert:(NSButton *)sender {
+    if (sender.state == NSControlStateValueOff) {
+        [self stopConvert:sender];
+    }else{
+        [self beginConvert:sender];
+    }
+}
+
+- (void)stopConvert:(NSButton *)sender
+{
+    [self.queue cancelAllOperations];
+}
+
+- (void)beginConvert:(NSButton *)sender
+{
     NSArray *urlArr = [self.dataSource copy];
     int i = 0;
     for (CellModel *model in urlArr) {
-        NSString *path = model.filePath;
+        
+        if (model.state == CellTaskStateSucceed || model.state == CellTaskStateRuning) {
+            i++;
+            continue;
+        }
+        
+        NSString *path = model.srcPath;
         
         __WeakSelf__
         [self.queue addOperationWithBlock:^{
@@ -165,21 +224,21 @@
                 
                 [self.tableView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:i] columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,4)]];
             }];
-            
+            sleep(3);
             NSImage *img = [[NSImage alloc]initWithContentsOfFile:path];
             NSError *error = nil;
             NSData *data = [NSImage convertToWebP:img quality:75 preset:WEBP_PRESET_DEFAULT configBlock:^(WebPConfig *config) {
-                        config->lossless = 0;
-                        config->method = 4;
+                config->lossless = 0;
+                config->method = 4;
             } error:&error];
             
             if(!error){
                 NSString *filePath = [[path stringByDeletingPathExtension]stringByAppendingPathExtension:@"webp"];
                 [data writeToFile:filePath atomically:YES];
                 NSLog(@"%@",filePath);
-                model.filePath = filePath;
+                model.destPath = filePath;
                 model.state = CellTaskStateSucceed;
-                NSDictionary *attributes = [[NSFileManager defaultManager]attributesOfItemAtPath:model.filePath error:nil];
+                NSDictionary *attributes = [[NSFileManager defaultManager]attributesOfItemAtPath:model.destPath error:nil];
                 model.webpFileSize = [attributes[NSFileSize]intValue];
                 model.savingSize = 100.0 * (int64_t)(model.fileSize - model.webpFileSize)/model.fileSize;
             }else{
@@ -191,10 +250,17 @@
                 __StrongSelf__
                 
                 [self.tableView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:i] columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 4)]];
+                
+                [self checkAllTaskFinish];
             }];
         }];
         
         i++;
+    }
+    
+    if ([self.queue operationCount] == 0) {
+        sender.state = NSControlStateValueOff;
+        sender.enabled = NO;
     }
 }
 
@@ -217,23 +283,21 @@
             StatusTableCellView *cellView = (StatusTableCellView *)cell;
             [cellView updateModel:model];
             [cellView registerOnClickedInfoButtonHandler:^(CellModel * _Nonnull cellModel) {
-                [[NSWorkspace sharedWorkspace] selectFile:model.filePath inFileViewerRootedAtPath:@""];
+                NSString *path = (model.destPath.length > 0) ? model.destPath : model.srcPath;
+                [[NSWorkspace sharedWorkspace] selectFile:path inFileViewerRootedAtPath:@""];
             }];
             
         } else if ([@"path" isEqualToString:identifier]) {
-            cell.textField.stringValue = model.filePath;
-//            cell.title = model.filePath;
+            NSString *path = (model.destPath.length > 0) ? model.destPath : model.srcPath;
+            cell.textField.stringValue = path;
         } else if ([@"size" isEqualToString:identifier]) {
             cell.textField.integerValue = model.fileSize;
-//            cell.title = [NSString stringWithFormat:@"%ld",model.fileSize];
         } else if ([@"save" isEqualToString:identifier]) {
             if (model.state == CellTaskStateSucceed) {
                 cell.textField.stringValue = [NSString stringWithFormat:@"%0.2f%%",model.savingSize];
             }else{
                 cell.textField.stringValue = @"-";
             }
-            
-//            cell.title = [NSString stringWithFormat:@"0.2f%",30.0f];
         }
     }
     return cell;

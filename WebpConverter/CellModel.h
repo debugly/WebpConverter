@@ -19,7 +19,8 @@ typedef NS_ENUM(NSUInteger, CellTaskState) {
 
 @interface CellModel : NSObject
 
-@property (nonatomic,copy) NSString *filePath;
+@property (nonatomic,copy) NSString *srcPath;
+@property (nonatomic,copy) NSString *destPath;
 @property (nonatomic,assign) uint64 fileSize;
 @property (nonatomic,assign) uint64 webpFileSize;
 @property (nonatomic,assign) CGFloat savingSize;

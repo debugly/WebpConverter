@@ -16,8 +16,6 @@
 		B41CC0C02199CD3C007A8AE7 /* libwebp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B41CC0B92199CD3C007A8AE7 /* libwebp.a */; };
 		B41CC0C12199CD3C007A8AE7 /* libwebpdemux.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B41CC0BA2199CD3C007A8AE7 /* libwebpdemux.a */; };
 		B41CC0C62199CD88007A8AE7 /* NSImage+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = B41CC0C52199CD88007A8AE7 /* NSImage+Category.m */; };
-		B41CC0C82199CEC6007A8AE7 /* flower.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41CC0C72199CEC6007A8AE7 /* flower.jpg */; };
-		B41CC126219C53D2007A8AE7 /* IMG_1063.png in Resources */ = {isa = PBXBuildFile; fileRef = B41CC125219C53D2007A8AE7 /* IMG_1063.png */; };
 		B41CC12C21A0559E007A8AE7 /* DragFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B41CC12B21A0559E007A8AE7 /* DragFileModel.m */; };
 		B41CC12F21A1BACA007A8AE7 /* CellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B41CC12E21A1BACA007A8AE7 /* CellModel.m */; };
 		B41CC13121A1BE11007A8AE7 /* DragView.m in Sources */ = {isa = PBXBuildFile; fileRef = B41CC13021A1BE11007A8AE7 /* DragView.m */; };
@@ -46,8 +44,6 @@
 		B41CC0BF2199CD3C007A8AE7 /* decode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = decode.h; sourceTree = "<group>"; };
 		B41CC0C42199CD88007A8AE7 /* NSImage+Category.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSImage+Category.h"; sourceTree = "<group>"; };
 		B41CC0C52199CD88007A8AE7 /* NSImage+Category.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Category.m"; sourceTree = "<group>"; };
-		B41CC0C72199CEC6007A8AE7 /* flower.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = flower.jpg; sourceTree = "<group>"; };
-		B41CC125219C53D2007A8AE7 /* IMG_1063.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMG_1063.png; sourceTree = "<group>"; };
 		B41CC12721A044D2007A8AE7 /* DragView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DragView.h; sourceTree = "<group>"; };
 		B41CC12A21A0559E007A8AE7 /* DragFileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DragFileModel.h; sourceTree = "<group>"; };
 		B41CC12B21A0559E007A8AE7 /* DragFileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DragFileModel.m; sourceTree = "<group>"; };
@@ -109,8 +105,6 @@
 				B41CC0912199C784007A8AE7 /* Main.storyboard */,
 				B41CC0942199C784007A8AE7 /* Info.plist */,
 				B41CC0952199C784007A8AE7 /* main.m */,
-				B41CC0C72199CEC6007A8AE7 /* flower.jpg */,
-				B41CC125219C53D2007A8AE7 /* IMG_1063.png */,
 				B41CC0972199C784007A8AE7 /* WebpConverter.entitlements */,
 			);
 			path = WebpConverter;
@@ -219,9 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B41CC0902199C784007A8AE7 /* Assets.xcassets in Resources */,
-				B41CC0C82199CEC6007A8AE7 /* flower.jpg in Resources */,
 				B41CC0932199C784007A8AE7 /* Main.storyboard in Resources */,
-				B41CC126219C53D2007A8AE7 /* IMG_1063.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
