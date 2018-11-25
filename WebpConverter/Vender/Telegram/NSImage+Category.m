@@ -171,31 +171,69 @@
 
     pic.custom_ptr = &writer;
     
-    CGImageRef webPImageRef = image.CGImage;
-    size_t webPBytesPerRow = CGImageGetBytesPerRow(webPImageRef);
+    CGImageRef imageRef = image.CGImage;
+    size_t bytesPerRow = CGImageGetBytesPerRow(imageRef);
     
-    size_t webPImageWidth = CGImageGetWidth(webPImageRef);
-    size_t webPImageHeight = CGImageGetHeight(webPImageRef);
+    size_t imageWidth = CGImageGetWidth(imageRef);
+    size_t imageHeight = CGImageGetHeight(imageRef);
     
-    CGDataProviderRef webPDataProviderRef = CGImageGetDataProvider(webPImageRef);
-    CFDataRef webPImageDatRef = CGDataProviderCopyData(webPDataProviderRef);
+    CGDataProviderRef dataProviderRef = CGImageGetDataProvider(imageRef);
+    CFDataRef imageDatRef = CGDataProviderCopyData(dataProviderRef);
     
-    uint8_t *webPImageData = (uint8_t *)CFDataGetBytePtr(webPImageDatRef);
+    uint8_t *imageData = (uint8_t *)CFDataGetBytePtr(imageDatRef);
     
-    pic.width = (int)webPImageWidth;
-    pic.height = (int)webPImageHeight;
+    pic.width = (int)imageWidth;
+    pic.height = (int)imageHeight;
     
+    CGImageAlphaInfo alphaInfo = CGImageGetAlphaInfo(imageRef);
     
-    WebPPictureImportRGB(&pic, webPImageData, (int)webPBytesPerRow);
+    switch (alphaInfo) {
+        //RGBA
+        case kCGImageAlphaPremultipliedLast:
+        case kCGImageAlphaLast:
+        {
+            WebPPictureImportRGBA(&pic, imageData, (int)bytesPerRow);
+        }
+            break;
+        case kCGImageAlphaOnly:
+        {
+            NSAssert(NO, @"不支持的编码类型");
+        }
+            break;
+        //ARGB
+        case kCGImageAlphaFirst:
+        case kCGImageAlphaPremultipliedFirst:
+        {
+            WebPPictureImportBGRA(&pic, imageData, (int)bytesPerRow);
+        }
+            break;
+        //RBGX
+        case kCGImageAlphaNoneSkipLast:
+        {
+            NSAssert(NO, @"不支持的编码类型");
+        }
+            break;
+        //XRBG
+        case kCGImageAlphaNoneSkipFirst:
+        {
+            NSAssert(NO, @"不支持的编码类型");
+        }
+            break;
+        case kCGImageAlphaNone:
+        {
+            WebPPictureImportRGB(&pic, imageData, (int)bytesPerRow);
+        }
+            break;
+    }
+    
     WebPPictureARGBToYUVA(&pic, pic.colorspace);
     WebPCleanupTransparentArea(&pic);
-    
     WebPEncode(&config, &pic);
     
     NSData *webPFinalData = [NSData dataWithBytes:writer.mem length:writer.size];
     
     WebPPictureFree(&pic);
-    CFRelease(webPImageDatRef);
+    CFRelease(imageDatRef);
     
     return webPFinalData;
 }

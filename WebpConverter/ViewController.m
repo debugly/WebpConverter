@@ -44,7 +44,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.bottomView.wantsLayer = YES;
 //    self.bottomView.layer.borderWidth = 10;
     self.bottomView.layer.borderColor = [[NSColor redColor]CGColor];
@@ -224,7 +224,7 @@
                 
                 [self.tableView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:i] columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,4)]];
             }];
-            sleep(3);
+
             NSImage *img = [[NSImage alloc]initWithContentsOfFile:path];
             NSError *error = nil;
             NSData *data = [NSImage convertToWebP:img quality:75 preset:WEBP_PRESET_DEFAULT configBlock:^(WebPConfig *config) {
@@ -234,13 +234,18 @@
             
             if(!error){
                 NSString *filePath = [[path stringByDeletingPathExtension]stringByAppendingPathExtension:@"webp"];
-                [data writeToFile:filePath atomically:YES];
-                NSLog(@"%@",filePath);
-                model.destPath = filePath;
-                model.state = CellTaskStateSucceed;
-                NSDictionary *attributes = [[NSFileManager defaultManager]attributesOfItemAtPath:model.destPath error:nil];
-                model.webpFileSize = [attributes[NSFileSize]intValue];
-                model.savingSize = 100.0 * (int64_t)(model.fileSize - model.webpFileSize)/model.fileSize;
+                BOOL ok = [data writeToFile:filePath options:NSDataWritingAtomic error:&error];
+                if (ok) {
+                    NSLog(@"%@",filePath);
+                    model.destPath = filePath;
+                    model.state = CellTaskStateSucceed;
+                    NSDictionary *attributes = [[NSFileManager defaultManager]attributesOfItemAtPath:model.destPath error:nil];
+                    model.webpFileSize = [attributes[NSFileSize]intValue];
+                    model.savingSize = 100.0 * (int64_t)(model.fileSize - model.webpFileSize)/model.fileSize;
+                }else{
+                    NSLog(@"Write File Failed:%@,Error:%@",filePath,error);
+                    model.state = CellTaskStateFailed;
+                }
             }else{
                 NSLog(@"Error:%@",error);
                 model.state = CellTaskStateFailed;
