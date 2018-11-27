@@ -13,14 +13,28 @@
 		B41CC0902199C784007A8AE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B41CC08F2199C784007A8AE7 /* Assets.xcassets */; };
 		B41CC0932199C784007A8AE7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B41CC0912199C784007A8AE7 /* Main.storyboard */; };
 		B41CC0962199C784007A8AE7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B41CC0952199C784007A8AE7 /* main.m */; };
-		B41CC0C02199CD3C007A8AE7 /* libwebp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B41CC0B92199CD3C007A8AE7 /* libwebp.a */; };
-		B41CC0C12199CD3C007A8AE7 /* libwebpdemux.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B41CC0BA2199CD3C007A8AE7 /* libwebpdemux.a */; };
 		B41CC0C62199CD88007A8AE7 /* NSImage+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = B41CC0C52199CD88007A8AE7 /* NSImage+Category.m */; };
 		B41CC12C21A0559E007A8AE7 /* DragFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B41CC12B21A0559E007A8AE7 /* DragFileModel.m */; };
 		B41CC12F21A1BACA007A8AE7 /* CellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B41CC12E21A1BACA007A8AE7 /* CellModel.m */; };
 		B41CC13121A1BE11007A8AE7 /* DragView.m in Sources */ = {isa = PBXBuildFile; fileRef = B41CC13021A1BE11007A8AE7 /* DragView.m */; };
 		B41CC13721A44F7F007A8AE7 /* StatusTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B41CC13621A44F7F007A8AE7 /* StatusTableCellView.m */; };
+		B41CC13C21AD876A007A8AE7 /* MRWebpConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = B41CC13B21AD876A007A8AE7 /* MRWebpConverter.m */; };
+		B41CC14821AD9B65007A8AE7 /* libwebp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B41CC14621AD9B65007A8AE7 /* libwebp.a */; };
+		B41CC14921AD9B65007A8AE7 /* libwebpdemux.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B41CC14721AD9B65007A8AE7 /* libwebpdemux.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B41CC14421AD9A17007A8AE7 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B41CC0832199C783007A8AE7 /* WebpConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebpConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,8 +50,6 @@
 		B41CC0952199C784007A8AE7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B41CC0972199C784007A8AE7 /* WebpConverter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebpConverter.entitlements; sourceTree = "<group>"; };
 		B41CC0B72199CD3C007A8AE7 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
-		B41CC0B92199CD3C007A8AE7 /* libwebp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwebp.a; sourceTree = "<group>"; };
-		B41CC0BA2199CD3C007A8AE7 /* libwebpdemux.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwebpdemux.a; sourceTree = "<group>"; };
 		B41CC0BC2199CD3C007A8AE7 /* demux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = demux.h; sourceTree = "<group>"; };
 		B41CC0BD2199CD3C007A8AE7 /* mux_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mux_types.h; sourceTree = "<group>"; };
 		B41CC0BE2199CD3C007A8AE7 /* encode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = encode.h; sourceTree = "<group>"; };
@@ -52,6 +64,10 @@
 		B41CC13021A1BE11007A8AE7 /* DragView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragView.m; sourceTree = "<group>"; };
 		B41CC13521A44F7F007A8AE7 /* StatusTableCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatusTableCellView.h; sourceTree = "<group>"; };
 		B41CC13621A44F7F007A8AE7 /* StatusTableCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatusTableCellView.m; sourceTree = "<group>"; };
+		B41CC13A21AD876A007A8AE7 /* MRWebpConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MRWebpConverter.h; sourceTree = "<group>"; };
+		B41CC13B21AD876A007A8AE7 /* MRWebpConverter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MRWebpConverter.m; sourceTree = "<group>"; };
+		B41CC14621AD9B65007A8AE7 /* libwebp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwebp.a; sourceTree = "<group>"; };
+		B41CC14721AD9B65007A8AE7 /* libwebpdemux.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwebpdemux.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,8 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B41CC0C02199CD3C007A8AE7 /* libwebp.a in Frameworks */,
-				B41CC0C12199CD3C007A8AE7 /* libwebpdemux.a in Frameworks */,
+				B41CC14821AD9B65007A8AE7 /* libwebp.a in Frameworks */,
+				B41CC14921AD9B65007A8AE7 /* libwebpdemux.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +107,8 @@
 				B41CC0872199C783007A8AE7 /* AppDelegate.m */,
 				B41CC0892199C783007A8AE7 /* ViewController.h */,
 				B41CC08A2199C783007A8AE7 /* ViewController.m */,
+				B41CC13A21AD876A007A8AE7 /* MRWebpConverter.h */,
+				B41CC13B21AD876A007A8AE7 /* MRWebpConverter.m */,
 				B41CC13521A44F7F007A8AE7 /* StatusTableCellView.h */,
 				B41CC13621A44F7F007A8AE7 /* StatusTableCellView.m */,
 				B41CC12D21A1BACA007A8AE7 /* CellModel.h */,
@@ -113,7 +131,7 @@
 		B41CC0B42199CD3C007A8AE7 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
-				B41CC0C32199CD4E007A8AE7 /* Telegram */,
+				B41CC0C32199CD4E007A8AE7 /* Category */,
 				B41CC0B52199CD3C007A8AE7 /* webp */,
 			);
 			path = Vender;
@@ -122,8 +140,8 @@
 		B41CC0B52199CD3C007A8AE7 /* webp */ = {
 			isa = PBXGroup;
 			children = (
+				B41CC14521AD9B65007A8AE7 /* libs */,
 				B41CC0B72199CD3C007A8AE7 /* types.h */,
-				B41CC0B82199CD3C007A8AE7 /* libs */,
 				B41CC0BC2199CD3C007A8AE7 /* demux.h */,
 				B41CC0BD2199CD3C007A8AE7 /* mux_types.h */,
 				B41CC0BE2199CD3C007A8AE7 /* encode.h */,
@@ -132,22 +150,22 @@
 			path = webp;
 			sourceTree = "<group>";
 		};
-		B41CC0B82199CD3C007A8AE7 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				B41CC0B92199CD3C007A8AE7 /* libwebp.a */,
-				B41CC0BA2199CD3C007A8AE7 /* libwebpdemux.a */,
-			);
-			path = libs;
-			sourceTree = "<group>";
-		};
-		B41CC0C32199CD4E007A8AE7 /* Telegram */ = {
+		B41CC0C32199CD4E007A8AE7 /* Category */ = {
 			isa = PBXGroup;
 			children = (
 				B41CC0C42199CD88007A8AE7 /* NSImage+Category.h */,
 				B41CC0C52199CD88007A8AE7 /* NSImage+Category.m */,
 			);
-			path = Telegram;
+			path = Category;
+			sourceTree = "<group>";
+		};
+		B41CC14521AD9B65007A8AE7 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				B41CC14621AD9B65007A8AE7 /* libwebp.a */,
+				B41CC14721AD9B65007A8AE7 /* libwebpdemux.a */,
+			);
+			path = libs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,6 +178,7 @@
 				B41CC07F2199C783007A8AE7 /* Sources */,
 				B41CC0802199C783007A8AE7 /* Frameworks */,
 				B41CC0812199C783007A8AE7 /* Resources */,
+				B41CC14421AD9A17007A8AE7 /* Embed Libraries */,
 			);
 			buildRules = (
 			);
@@ -229,6 +248,7 @@
 				B41CC08B2199C783007A8AE7 /* ViewController.m in Sources */,
 				B41CC13721A44F7F007A8AE7 /* StatusTableCellView.m in Sources */,
 				B41CC0962199C784007A8AE7 /* main.m in Sources */,
+				B41CC13C21AD876A007A8AE7 /* MRWebpConverter.m in Sources */,
 				B41CC0C62199CD88007A8AE7 /* NSImage+Category.m in Sources */,
 				B41CC0882199C783007A8AE7 /* AppDelegate.m in Sources */,
 				B41CC13121A1BE11007A8AE7 /* DragView.m in Sources */,
@@ -378,6 +398,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/WebpConverter/Vender/webp/libs",
+					"$(PROJECT_DIR)/WebpConverter/Vender/webp/dylib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xql.WebpConverter;
@@ -403,6 +424,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/WebpConverter/Vender/webp/libs",
+					"$(PROJECT_DIR)/WebpConverter/Vender/webp/dylib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xql.WebpConverter;

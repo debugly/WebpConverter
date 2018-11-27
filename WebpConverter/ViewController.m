@@ -9,7 +9,7 @@
 
 #import "ViewController.h"
 #import "DragView.h"
-#import "NSImage+Category.h"
+#import "MRWebpConverter.h"
 #import "DragFileModel.h"
 #import "CellModel.h"
 #import "StatusTableCellView.h"
@@ -225,9 +225,8 @@
                 [self.tableView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:i] columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,4)]];
             }];
 
-            NSImage *img = [[NSImage alloc]initWithContentsOfFile:path];
             NSError *error = nil;
-            NSData *data = [NSImage convertToWebP:img quality:75 preset:WEBP_PRESET_DEFAULT configBlock:^(WebPConfig *config) {
+            NSData *data = [MRWebpConverter convertToWebP:path configBlock:^(WebPConfig * config) {
                 config->lossless = 0;
                 config->method = 4;
             } error:&error];
