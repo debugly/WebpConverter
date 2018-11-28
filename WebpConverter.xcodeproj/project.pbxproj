@@ -23,19 +23,6 @@
 		B41CC14921AD9B65007A8AE7 /* libwebpdemux.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B41CC14721AD9B65007A8AE7 /* libwebpdemux.a */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		B41CC14421AD9A17007A8AE7 /* Embed Libraries */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Libraries";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		B41CC0832199C783007A8AE7 /* WebpConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebpConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B41CC0862199C783007A8AE7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -178,7 +165,6 @@
 				B41CC07F2199C783007A8AE7 /* Sources */,
 				B41CC0802199C783007A8AE7 /* Frameworks */,
 				B41CC0812199C783007A8AE7 /* Resources */,
-				B41CC14421AD9A17007A8AE7 /* Embed Libraries */,
 			);
 			buildRules = (
 			);
